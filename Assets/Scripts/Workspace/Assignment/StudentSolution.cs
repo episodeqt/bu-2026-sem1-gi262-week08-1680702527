@@ -85,17 +85,36 @@ namespace Assignment
 
         private int Power(int baseNum, int exponent)
         {
-            return -1;
+
+            if (exponent == 0)
+            {
+                return 1;
+            }
+
+            return baseNum * Power(baseNum, exponent - 1);
         }
 
         public bool ASN02_IsPalindrome(string str)
         {
+
+            if (string.IsNullOrEmpty(str)) return true;
             return IsPalindrome(str, 0, str.Length - 1);
         }
 
         private bool IsPalindrome(string str, int start, int end)
         {
-            return false;
+
+            if (start >= end)
+            {
+                return true;
+            }
+
+            if (str[start] != str[end])
+            {
+                return false;
+            }
+
+            return IsPalindrome(str, start + 1, end - 1);
         }
 
         public int ASN03_RecursiveGCD(int a, int b)
@@ -105,7 +124,13 @@ namespace Assignment
 
         private int GCD(int a, int b)
         {
-            return -1;
+
+            if (b == 0)
+            {
+                return a;
+            }
+
+            return GCD(b, a % b);
         }
 
         public int ASN04_RecursiveBinarySearch(int[] arr, int target)
@@ -115,7 +140,21 @@ namespace Assignment
 
         private int BinarySearch(int[] arr, int target, int low, int high)
         {
-            return -1;
+
+            if (low > high)
+            {
+                return -1;
+            }
+            int mid = low + (high - low) / 2;
+            if (arr[mid] == target)
+            {
+                return mid;
+            }
+            if (arr[mid] > target)
+            {
+                return BinarySearch(arr, target, low, mid - 1);
+            }
+            return BinarySearch(arr, target, mid + 1, high);
         }
 
         #endregion
